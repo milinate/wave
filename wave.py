@@ -35,7 +35,6 @@ class GradientWave(QOpenGLWidget):
         glColor3f(r, g, b)
         glVertex2f(1.0, -1.0)
         
-        # Левый нижний угол (X=-1, Y=-1)
         r, g, b = self.get_color(-1.0, -1.0, self.time)
         glColor3f(r, g, b)
         glVertex2f(-1.0, -1.0)
@@ -44,10 +43,14 @@ class GradientWave(QOpenGLWidget):
 
     def get_color(self, x, y, t):
         wave = math.sin(x * 5.0 + t) * 0.5 + 0.5
-      
+        
         r = wave * 0.5 + 0.5
         g = wave * 0.2
         b = wave * 0.8 + 0.2
+        
+        r = max(0.0, min(1.0, r))
+        g = max(0.0, min(1.0, g))
+        b = max(0.0, min(1.0, b))
         
         return r, g, b
 
